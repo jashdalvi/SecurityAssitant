@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/sign_styles.css' %}" />
+    <title>Admin & User Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="admin-user">
+          <form
+            action="/userDashboard"
+            class="user-sign-in-form"
+            id="userLoginForm"
+            method="POST"
+          >
+            {% csrf_token %}
+            <h2 class="title">User Login</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input
+                type="email"
+                id="userEmail"
+                placeholder="Email Id"
+                name="userEmail"
+                required
+              />
+              <small>Error message</small>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="userPassword"
+                placeholder="Password"
+                name="userPassword"
+                required
+              />
+              <small>Error message</small>
+            </div>
+            <input type="submit" value="Login" class="btn solid" />
+            <p class="forgot-password">Forgot Password?</p>
+          </form>
+          <form
+            action="/adminDashboard"
+            class="admin-sign-in-form"
+            id="adminLoginForm"
+            method="POST"
+          >
+            {% csrf_token %}
+            <h2 class="title">Admin Login</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input
+                type="email"
+                placeholder="Email Id"
+                id="adminEmail"
+                name="adminEmail"
+                required
+              />
+              <small>Error message</small>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                placeholder="Password"
+                id="adminPassword"
+                name="adminPassword"
+                required
+              />
+              <small>Error message</small>
+            </div>
+            <input type="submit" value="Login" class="btn solid" />
+            <p class="forgot-password">Forgot Password?</p>
+          </form>
+        </div>
+      </div>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>Admin ?</h3>
+            <p>So From Here You Can Login</p>
+            <button class="btn transparent" id="admin-login-btn">
+              Admin Login
+            </button>
+          </div>
+          <img src="{% static 'img/log.svg' %}" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>User ?</h3>
+            <p>So From Here You Can Login</p>
+            <button class="btn transparent" id="user-login-btn">
+              User Login
+            </button>
+          </div>
+          <img src="{% static 'img/register.svg' %}" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/signIn.js' %}"></script>
+  </body>
+</html>

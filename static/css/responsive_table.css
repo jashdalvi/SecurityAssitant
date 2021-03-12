@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+table {
+  position: absolute;
+  border-collapse: collapse;
+  width: 80%;
+  border: 1px solid #bdc3c7;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+tr {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+td,
+th {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #dddddd;
+}
+
+#table_header {
+  background-color: #304d8e;
+  color: #f7f6fb;
+}
+
+h1 {
+  font-weight: 600;
+  color: black;
+  padding: 10px 0px;
+}
+
+tr:hover {
+  background-color: #afa5d9;
+  transform: scale(1.05);
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+}
+#table_header:hover {
+  transform: none;
+}
+
+.new_user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new_user_btn {
+  width: 150px;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #5995fd;
+  color: white;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.new_user_btn:hover {
+  background-color: #2a38f5;
+}
+
+.delete_btn {
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #5995fd;
+  color: white;
+  font-size: 1.25rem;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.delete_btn:hover {
+  background-color: #2a38f5;
+}
+@media (max-width: 768px) {
+  table {
+    width: 90%;
+  }
+}

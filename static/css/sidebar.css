@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+/* CSS Variables */
+
+:root {
+  --header-height: 3rem;
+  --nav-width: 70px;
+
+  /* Colors */
+  --sidebar-bg-color: #304d8e;
+  --nav-link-color: #afa5d9;
+  --white-color: #f7f6fb;
+
+  /* Font */
+  --body-font: "Poppins", sans-serif;
+  --normal-font-size: 1rem;
+}
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 1s;
+}
+a {
+  text-decoration: none;
+}
+
+.header {
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--white-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 100;
+  transition: 1s;
+}
+
+.header_toggle {
+  color: var(--sidebar-bg-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+/* Nav */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: var(--nav-width);
+  height: 100vh;
+  background-color: var(--sidebar-bg-color);
+  padding: 0.5rem 1rem 0 0;
+  transition: 1s;
+  z-index: 100;
+}
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.logo,
+.nav_link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+.logo {
+  margin-bottom: 2rem;
+}
+.logo_icon {
+  font-size: 1.5rem;
+  color: var(--white-color);
+}
+.logo_name {
+  color: var(--white-color);
+  font-weight: 700;
+}
+.nav_link {
+  position: relative;
+  color: var(--nav-link-color);
+  margin-bottom: 1.5rem;
+  transition: 0.8s;
+}
+.nav_link:hover {
+  padding-left: 30px;
+  color: var(--white-color);
+}
+.nav_link_icon {
+  font-size: 1.5rem;
+}
+/* Show moving Navbar */
+.show {
+  left: 0;
+}
+/* Add Body padding for desktop */
+.body-desktop {
+  padding-left: calc(var(--nav-width) + 1rem);
+}
+/* For active Links */
+.active {
+  color: var(--white-color);
+  transition: all 0.5s;
+}
+.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 32px;
+  background-color: var(--white-color);
+}
+.face_recognition_btn {
+  position: fixed;
+  left: 25%;
+  top: 40%;
+  width: 250px;
+  height: 50px;
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #5995fd;
+  color: white;
+  margin: 30px 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.face_recognition_btn:hover {
+  background-color: #2a38f5;
+}
+/* Media query */
+@media screen and (min-width: 768px) {
+  body {
+    margin: calc(var(--header-height) + 1rem) 0 0 0;
+    padding-left: calc(var(--nav-width) + 2rem);
+  }
+  .header {
+    height: calc(var(--header-height) + 1rem);
+    padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+  }
+  .sidebar {
+    left: 0;
+    padding: 1rem 1rem 0 0;
+  }
+  .show {
+    width: calc(var(--nav-width) + 160px);
+  }
+  .body-desktop {
+    padding-left: calc(var(--nav-width) + 190px);
+  }
+}
