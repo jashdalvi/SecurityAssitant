@@ -151,7 +151,7 @@ class FaceDetect():
 
         elapsed_time = time.time() - starting_time
         fps = 1 / elapsed_time
-        #cv2.putText(frame,"FPS: {}".format(str(round(fps,3))),(10,25),cv2.FONT_HERSHEY_SIMPLEX,1.0,(0,0,255),2)
+        cv2.putText(frame,"FPS: {}".format(str(round(fps,3))),(10,25),cv2.FONT_HERSHEY_SIMPLEX,1.0,(0,0,255),2)
 
         #cv2.imshow('Frame',frame)
         #out.write(frame)

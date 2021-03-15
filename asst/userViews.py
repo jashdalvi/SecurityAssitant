@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http.response import StreamingHttpResponse
 from asst.src.recognize_faces_ssd import FaceDetect
 from asst.src.yolo_object_detection import Temperature
-# from asst.src.create_dataset import CreateDataset
+from asst.src.create_dataset import CreateDataset
 import pyrebase
 from datetime import datetime,timezone
 import time
 import pytz
+import uuid
 
 firebaseConfig = {
     "apiKey": "AIzaSyDTxZrx6g5MiyLZwlvwzCA5oPOHLphxsd8",
@@ -23,6 +24,10 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 
 firebaseAuth = firebase.auth()
 database = firebase.database()
+
+camera = FaceDetect()
+temperature = Temperature()
+create_dataset = CreateDataset()
 
 
 def postUserLogin(request):
@@ -67,6 +72,7 @@ def postVisitorRegistration(request):
     visitorWork = request.POST.get('visitorWork')
     flatNo = request.POST.get('flatNo')
     try:
+
         idToken = request.session['uid']
         info = firebaseAuth.get_account_info(idToken)
         userToken = info['users'][0]['localId']
@@ -76,6 +82,7 @@ def postVisitorRegistration(request):
             userToken).child('details').child('secretaryId').get(idToken).val()
         database.child("users").child("secretary").child(secretaryId).child(
             "visitors").child(visitorName).set(data, idToken)
+        create_dataset.send_label(visitorName)
         return render(request, 'createDataset.html')
     except:
         return render(request, 'visitorRegistration.html')
@@ -106,10 +113,11 @@ def postVisitorRecognition(request):
         # dd/mm/YY H:M:S
         todayDate = now.strftime("%b-%d-%Y")
         inTime = now.strftime("%H:%M")
+        reportId = uuid.uuid4()
         data = {"visitorName": visitorName, "visitorAddress": visitorAddress, "phoneNumber": phoneNumber,
                 "visitorWork": visitorWork, "flatNo": flatNo, "temperature": temperature + "°F", "watchmanName": watchmanName, "inTime": inTime}
         database.child("users").child("secretary").child(secretaryId).child(
-            "reports").child(todayDate).child(visitorName).set(data, idToken)
+            "reports").child(todayDate).child(reportId).set(data, idToken)
         return render(request, 'userDashboard.html')
     except:
         return render(request, 'createVisitorReport.html')
@@ -151,9 +159,7 @@ def userReports(request):
         return render(request, 'signIn.html', {"message": message})
 
 
-camera = FaceDetect()
-temperature = Temperature()
-# create_dataset = CreateDataset('Sanket')
+
 
 
 def gen(camera):
@@ -168,20 +174,22 @@ def gen(camera):
 
 def facecam_feed(request):
     camera.camera_init()
-    return StreamingHttpResponse(gen(camera),
+    response = StreamingHttpResponse(gen(camera),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
+    return response
 
 
 def temperature_feed(request):
     camera.destroy()
     temperature.camera_init()
-    return StreamingHttpResponse(gen(temperature),
+    response = StreamingHttpResponse(gen(temperature),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
+    return response 
 
 
-# def createDataset_feed(request):
-#     create_dataset.camera_init()
-#     return StreamingHttpResponse(gen(create_dataset), content_type='multipart/x-mixed-replace; boundary=frame')
+def createDataset_feed(request):
+    create_dataset.camera_init()
+    return StreamingHttpResponse(gen(create_dataset), content_type='multipart/x-mixed-replace; boundary=frame')
 
 
 def createVisitorReport(request):

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Refresh" content="10;recordVisitorTemperature"/>
     <!-- ===== BOX ICONS ===== -->
     <link
       href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
@@ -53,9 +54,9 @@
     </div>
     <h1>Real Time Face Recognition</h1>
   <img src="{% url 'facecam_feed' %}">
-  <a href="{% url 'recordVisitorTemperature' %}" class="face_recognition_btn">
+  <!-- <a href="{% url 'recordVisitorTemperature' %}" class="face_recognition_btn">
     Record Temperature
-  </a>
+  </a> -->
   <script src="{% static 'js/sidebar.js' %}"></script>
   </body>
 </html

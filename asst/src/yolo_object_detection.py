@@ -50,6 +50,7 @@ class Temperature:
 
 
     def get_frame(self):
+        starting_time = time.time()
         ret,img = self.cap.read()
         #img = cv2.imread(img_path)
         #img = cv2.resize(frame, None, fx=0.8, fy=0.8)
@@ -133,6 +134,8 @@ class Temperature:
             self.temperatures.append(display_temp)
         
         ending_time = time.time()
+        fps = 1/(ending_time - starting_time)
+        cv2.putText(img,"FPS: {}".format(str(round(fps,3))),(10,25),cv2.FONT_HERSHEY_SIMPLEX,1.0,(0,0,255),2)
         # if ending_time - starting_time > 10:
         #     break
         # cv2.imshow("Image", img)
