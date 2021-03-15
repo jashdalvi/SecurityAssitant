@@ -48,7 +48,7 @@
             <i class="bx bxs-certification nav_link_icon"></i>
             <span class="link_name">Settings</span>
           </a>
-          <a href="{% url 'signIn' %}" class="nav_link">
+          <a href="{% url 'logout' %}" class="nav_link">
             <i class="bx bx-log-out nav_link_icon"></i>
             <span class="link_name">Log Out</span>
           </a>
@@ -56,53 +56,32 @@
       </nav>
     </div>
     <h1>Reports</h1>
+    {% if data_not_found %}
     <table>
       <tr id="table_header">
         <th>Sr No.</th>
         <th>Person Name</th>
-        <th>Building Name</th>
+        <th>Flat No</th>
         <th>Work</th>
         <th>In Time</th>
         <th>Temperature</th>
         <th>Security Name</th>
       </tr>
+      {% for i,worker in combine %}
       <tr>
-        <td>1</td>
-        <td>Sanket Bafna</td>
-        <td>Siddhesh Deep</td>
-        <td>Worker</td>
-        <td>10:00</td>
-        <td>98.9</td>
-        <td>Vinay</td>
+        <td>{{i}}</td>
+        <td>{{worker.visitorName}}</td>
+        <td>{{worker.flatNo}}</td>
+        <td>{{worker.visitorWork}}</td>
+        <td>{{worker.inTime}}</td>
+        <td>{{worker.temperature}}</td>
+        <td>{{worker.watchmanName}}</td>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Sanket Bafna</td>
-        <td>Siddhesh Deep</td>
-        <td>Worker</td>
-        <td>10:00</td>
-        <td>98.9</td>
-        <td>Vinay</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Sanket Bafna</td>
-        <td>Siddhesh Deep</td>
-        <td>Worker</td>
-        <td>10:00</td>
-        <td>98.9</td>
-        <td>Vinay</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Sanket Bafna</td>
-        <td>Siddhesh Deep</td>
-        <td>Worker</td>
-        <td>10:00</td>
-        <td>98.9</td>
-        <td>Vinay</td>
-      </tr>
+      {% endfor %}
     </table>
+    {% else %}
+    <h3>Yet, there are no reports created for Today</h3>
+    {% endif %}
     <script src="{% static 'js/sidebar.js' %}"></script>
   </body>
 </html>

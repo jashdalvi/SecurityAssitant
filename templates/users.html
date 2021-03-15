@@ -46,7 +46,7 @@
             <i class="bx bxs-certification nav_link_icon"></i>
             <span class="link_name">Settings</span>
           </a>
-          <a href="{% url 'signIn' %}" class="nav_link">
+          <a href="{% url 'logout' %}" class="nav_link">
             <i class="bx bx-log-out nav_link_icon"></i>
             <span class="link_name">Log Out</span>
           </a>
@@ -59,8 +59,31 @@
         <i class="bx bx-plus"></i>New User
       </a>
     </div>
-
+    {% if data_found %}
     <table>
+      <tr id="table_header">
+        <th>Sr No.</th>
+        <th>Name of User</th>
+        <th>Email Id</th>
+        <th>Building Assigned</th>
+        <th>Phone No</th>
+        <th>Created At</th>
+      </tr>
+      {% for i,user in combine %}
+      <tr>
+        <td>{{i}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.buildingAssigned}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{user.createdAt}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <h3>Yet, there are no reports created for Today</h3>
+    {% endif %}
+    <!-- <table>
       <tr id="table_header">
         <th>Sr No.</th>
         <th>Name of User</th>
@@ -77,7 +100,7 @@
         <td>10 Dec,2020 14:00</td>
         <td><button class="delete_btn">Delete</button></td>
       </tr>
-    </table>
+    </table> -->
     <script src="{% static 'js/sidebar.js' %}"></script>
   </body>
 </html>

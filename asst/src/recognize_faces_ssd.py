@@ -10,12 +10,12 @@ from collections import Counter
 import dlib
 from asst.src.facealigner import FaceAligner
 
-predictor = dlib.shape_predictor('/home/jash/Desktop/JashWork/asst/asst/data/shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('/home/jash/Desktop/JashWork/asst21/asst/data/shape_predictor_68_face_landmarks.dat')
 fa = FaceAligner(predictor, desiredFaceWidth=256)
 
-head_model_path = '/home/jash/Desktop/JashWork/asst/asst/data/head_model.sav'
-scaling_path = '/home/jash/Desktop/JashWork/asst/asst/data/scaling.pkl'
-labelencoder_path = '/home/jash/Desktop/JashWork/asst/asst/data/labelencoder.pkl'
+head_model_path = '/home/jash/Desktop/JashWork/asst21/asst/data/head_model.sav'
+scaling_path = '/home/jash/Desktop/JashWork/asst21/asst/data/scaling.pkl'
+labelencoder_path = '/home/jash/Desktop/JashWork/asst21/asst/data/labelencoder.pkl'
 
 #labels = os.listdir('Dataset')
 with open(scaling_path, 'rb') as f:
@@ -79,8 +79,8 @@ def predict_faces_and_names(resized_frame,faceNet,model):
 #ap.add_argument('-f','--face',default = 'face_detector',help = 'path to the face detector model')
 #args = vars(ap.parse_args())
 
-prototxtPath = '/home/jash/Desktop/JashWork/asst/asst/face_detector/deploy.prototxt'
-weightsPath = '/home/jash/Desktop/JashWork/asst/asst/face_detector/res10_300x300_ssd_iter_140000.caffemodel'
+prototxtPath = '/home/jash/Desktop/JashWork/asst21/asst/face_detector/deploy.prototxt'
+weightsPath = '/home/jash/Desktop/JashWork/asst21/asst/face_detector/res10_300x300_ssd_iter_140000.caffemodel'
 faceNet = cv2.dnn.readNet(prototxtPath,weightsPath)
 
 USE_GPU=False

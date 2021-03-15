@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
     <link rel="stylesheet" href="{% static 'css/visitor_registration.css' %}" />
-    <title>Visitor Recognition</title>
+    <title>Visitor Report</title>
   </head>
   <body id="body-desktop">
     <header class="header" id="header-desktop">
@@ -46,16 +46,16 @@
             <i class="bx bxs-certification nav_link_icon"></i>
             <span class="link_name">Settings</span>
           </a>
-          <a href="{% url 'signIn' %}" class="nav_link">
+          <a href="{% url 'logout' %}" class="nav_link">
             <i class="bx bx-log-out nav_link_icon"></i>
             <span class="link_name">Log Out</span>
           </a>
         </div>
       </nav>
     </div>
-    <h2>Visitor Registration</h2>
+    <h2>Daily Visitor Report</h2>
     <div class="form_div">
-      <form action="" method="POST" id="visitorForm">
+      <form action="/postVisitorRecognition" method="POST" id="visitorForm">
         {% csrf_token %}
         <div class="input-field">
           <input
@@ -63,6 +63,7 @@
             placeholder="Visitor Name"
             id="visitorName"
             name="visitorName"
+            value="{{data.visitorName}}"
             required
           />
           <small>Error message</small>
@@ -73,6 +74,7 @@
             placeholder="Address"
             id="visitorAddress"
             name="visitorAddress"
+            value="{{data.visitorAddress}}"
             required
           />
           <small>Error message</small>
@@ -83,6 +85,7 @@
             placeholder="Phone No"
             id="phoneNumber"
             name="phoneNumber"
+            value="{{data.phoneNumber}}"
             required
           />
           <small>Error message</small>
@@ -93,6 +96,7 @@
             placeholder="Visitor's Work"
             id="visitorWork"
             name="visitorWork"
+            value="{{data.visitorWork}}"
             required
           />
           <small>Error message</small>
@@ -103,6 +107,7 @@
             placeholder="Flat No"
             id="flatNo"
             name="flatNo"
+            value="{{data.flatNo}}"
             required
           />
           <small>Error message</small>
@@ -113,7 +118,9 @@
             placeholder="Temperature"
             id="temperature"
             name="temperature"
+            value="{{temperature}}"
             required
+            readonly
           />
           <small>Error message</small>
         </div>

@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
-    <title>Record Visitor Temperature</title>
+    <title>Create Dataset</title>
   </head>
   <body id="body-desktop">
     <header class="header" id="header-desktop">
@@ -51,11 +51,8 @@
         </div>
       </nav>
     </div>
-    <h1>Record Temperature</h1>
-    <img src="{% url 'temperature_feed' %}" />
-    <a href="{% url 'createReport' %}" class="face_recognition_btn">
-      <i class="bx bx-plus"></i>Create Report
-    </a>
-    <script src="{% static 'js/sidebar.js' %}"></script>
+    <h1>Create Dataset For Regular Visitors</h1>
+  <img src="{% url 'facecam_feed' %}">
+  <script src="{% static 'js/sidebar.js' %}"></script>
   </body>
-</html>
+</html

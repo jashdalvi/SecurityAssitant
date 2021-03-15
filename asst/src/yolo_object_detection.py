@@ -11,8 +11,8 @@ from collections import Counter
 import time
 
 # Load Yolo
-yolo_weights = "/home/jash/Desktop/JashWork/asst/asst/data/yolov3_training_last.weights"
-yolo_config = "/home/jash/Desktop/JashWork/asst/asst/data/yolov3_testing.cfg"
+yolo_weights = "/home/jash/Desktop/JashWork/asst21/asst/data/yolov3_training_last.weights"
+yolo_config = "/home/jash/Desktop/JashWork/asst21/asst/data/yolov3_testing.cfg"
 net = cv2.dnn.readNet(yolo_weights,yolo_config)
 
 USE_GPU=False
@@ -27,11 +27,9 @@ if USE_GPU:
 # Name custom object
 classes = ["digit"]
 
-head_model = load_model("/home/jash/Desktop/JashWork/asst/asst/data/digitnet2")
+head_model = load_model("/home/jash/Desktop/JashWork/asst21/asst/data/digitnet2")
 
-# Images path
-# images_path = glob.glob(r"D:\Pysource\Youtube\2020\105) Train Yolo google cloud\dataset\*.jpg")
-# images_path = ['21.png','25.png','703.png','708.png']
+
 
 
 
@@ -87,7 +85,7 @@ class Temperature:
                     confidences.append(float(confidence))
                     class_ids.append(class_id)
 
-        indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.1, 0.6)
+        indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.3, 0.3)
         font = cv2.FONT_HERSHEY_PLAIN
         mnist_images = []
         new_boxes_x = []

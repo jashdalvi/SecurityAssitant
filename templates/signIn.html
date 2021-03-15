@@ -16,7 +16,7 @@
       <div class="forms-container">
         <div class="admin-user">
           <form
-            action="/userDashboard"
+            action="/postUserLogin"
             class="user-sign-in-form"
             id="userLoginForm"
             method="POST"
@@ -46,10 +46,12 @@
               <small>Error message</small>
             </div>
             <input type="submit" value="Login" class="btn solid" />
-            <p class="forgot-password">Forgot Password?</p>
+            <a class="forgot-password" href="{% url 'forgotPassword' %}"
+              >Forgot Password?</a
+            >
           </form>
           <form
-            action="/adminDashboard"
+            action="/postAdminLogin"
             class="admin-sign-in-form"
             id="adminLoginForm"
             method="POST"
@@ -79,7 +81,9 @@
               <small>Error message</small>
             </div>
             <input type="submit" value="Login" class="btn solid" />
-            <p class="forgot-password">Forgot Password?</p>
+            <a class="forgot-password" href="{% url 'forgotPassword' %}"
+              >Forgot Password?</a
+            >
           </form>
         </div>
       </div>
@@ -106,6 +110,11 @@
         </div>
       </div>
     </div>
+    {% if message %}
+    <script>
+      alert("{{ message }}");
+    </script>
+    {% endif %}
     <script src="{% static 'js/signIn.js' %}"></script>
   </body>
 </html>
