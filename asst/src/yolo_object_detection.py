@@ -11,7 +11,7 @@ from collections import Counter
 import time
 
 # Load Yolo
-yolo_weights = "/home/jash/Desktop/JashWork/asst21/asst/data/yolov3_training_last.weights"
+yolo_weights = "/home/jash/Desktop/JashWork/asst21/asst/data/yolov3_training_last1.weights"
 yolo_config = "/home/jash/Desktop/JashWork/asst21/asst/data/yolov3_testing.cfg"
 net = cv2.dnn.readNet(yolo_weights,yolo_config)
 
@@ -129,7 +129,7 @@ class Temperature:
             
             display_temp = "".join(final_temperature[:-1]) + "." + final_temperature[-1]
             #display_temp_ocr = "".join(text[:-1]) + "." + text[-1]
-            #print(display_temp)
+            print(display_temp)
             #print("The temperature with tesseract is {}".format(display_temp_ocr))
             self.temperatures.append(display_temp)
         
@@ -153,12 +153,18 @@ class Temperature:
         temperature_dict = dict(Counter(self.temperatures))
         self.best_temp = '98.1'
         temperature_sorted = sorted(temperature_dict.items(),key = lambda x : x[1],reverse = True)
+        print(temperature_sorted)
         for key,value in temperature_sorted:
             if float(key) >= 95.0 and float(key) <= 105.0:
                 self.best_temp = key
                 break
-
+        print(self.best_temp)
         return self.best_temp
+
+    def re_init(self):
+        self.temperatures = []
+        self.best_temp = None
+
 
 
 

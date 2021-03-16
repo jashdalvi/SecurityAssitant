@@ -207,6 +207,8 @@ def createVisitorReport(request):
             # print(secretaryId)
             name = camera.get_name()
             temperature1 = temperature.get_temperature()
+            camera.re_init()
+            temperature.re_init()
             # print(name)
             # print(temperature1)
             if name != 'Guest':

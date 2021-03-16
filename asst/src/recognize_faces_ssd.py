@@ -176,6 +176,10 @@ class FaceDetect():
 
         return self.name_to_display
 
+    def re_init(self):
+        self.names_display = []
+        self.name_to_display = None
+
 
 #display_names=dict(Counter(names_display))
 #max_display = 0
