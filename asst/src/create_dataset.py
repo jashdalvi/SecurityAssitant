@@ -108,11 +108,15 @@ class CreateDataset:
             cv2.imwrite(path,save_frame)
         # j = Image.fromarray(save_frame[:,:,::-1])
         # j.save(path)
+        self.frame_num += 1
 
         if self.image_num > 20:
+            self.label = None
+            self.image_num = 0
+            self.frame_num = 1
             self.destroy()
 
-        self.frame_num += 1
+        
 
         ret, jpeg = cv2.imencode('.jpg', frame)
         return jpeg.tobytes()
@@ -120,6 +124,8 @@ class CreateDataset:
     def destroy(self):
         self.cap.release()
         cv2.destroyAllWindows()
+
+
 
 
 

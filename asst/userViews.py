@@ -8,6 +8,7 @@ from datetime import datetime,timezone
 import time
 import pytz
 import uuid
+import pandas as pd
 
 firebaseConfig = {
     "apiKey": "AIzaSyDTxZrx6g5MiyLZwlvwzCA5oPOHLphxsd8",
@@ -136,7 +137,9 @@ def userReports(request):
             secretaryId = database.child('users').child('watchman').child(
                 userToken).child('details').child('secretaryId').get(idToken).val()
             # print(secretaryId)
-            todayDate = datetime.now().strftime("%b-%d-%Y")
+            tz = pytz.timezone('Asia/Kolkata')
+            now = datetime.now(timezone.utc).astimezone(tz)
+            todayDate = now.strftime("%b-%d-%Y")
             # print(todayDate)
             data = database.child("users").child("secretary").child(
                 secretaryId).child("reports").child(todayDate).get(idToken).val()
@@ -146,10 +149,35 @@ def userReports(request):
                 combine = None
             else:
                 data_not_found = True
+                excel_file = []
                 for key, value in data.items():
                     # print(key)
+                    temp_data = []
                     worker_details.append(value)
+                    column_names = []
+                    for i,j in value.items():
+                        column_names.append(i)
+                        temp_data.append(j)
+                    excel_file.append(temp_data)
+                    print(column_names)
+                    print(temp_data)
+                print(excel_file)
+                df = pd.DataFrame(excel_file,columns = column_names)
+                df["date"] = pd.to_datetime(df["inTime"],format = "%H:%M")
+                df = df.sort_values(by = "date",ascending = True)
+                df_save = df.drop("date",axis = 1)
+                # df_save.to_csv("/home/jash/Desktop/JashWork/asst21/asst/output/report{}.csv".format(todayDate))
+                columns = df_save.columns
+                data_send = df_save.values.tolist()
+                worker_details = []
+                for x in data_send:
+                    temp_dict = {}
+                    for i,j in zip(columns,x):
+                        temp_dict[i] = j
+                    worker_details.append(temp_dict)
+                print(worker_details)
                 # print(worker_details)
+
                 sr_no = list(range(1, len(worker_details) + 1))
                 combine = zip(sr_no, worker_details)
             # print(data_not_found)
